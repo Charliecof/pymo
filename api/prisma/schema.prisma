@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Hospital {
+  id Int @id @default(autoincrement())
+  name String
+  casosMensuales Casos[]
+  peticiones Peticiones[]
+  paquetes Paquetes[]
+}
+
+model Casos {
+  id Int @id @default(autoincrement())
+  hospital Hospital @relation(fields: [id_hospital],references: [id])
+  id_hospital Int 
+  cantidad Int
+  mes DateTime
+}
+
+model Peticiones{
+  id Int @id @default(autoincrement())
+  hospital Hospital @relation(fields: [id_hospital],references: [id])
+  id_hospital Int
+  insumos Insumos[]
+}
+
+model Insumos{
+  id Int @id @default(autoincrement())
+  nombre String
+  descripcion String
+  peticiones Peticiones[]
+  paquetes Paquetes[]
+}
+
+
+model Paquetes{
+  id Int @id @default(autoincrement())
+  hospital Hospital @relation(fields: [id_hospital],references: [id])
+  id_hospital Int
+  delivery_date DateTime
+  insumos Insumos[]  
+}
