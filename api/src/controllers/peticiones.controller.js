@@ -62,10 +62,16 @@ exports.acceptPeticion = async (req,res,next) =>{
 
 exports.peticionesGraph = async (req,res,next) =>{
     try {
-        const data = await peticionesServices.getByMonth(23);
         const hospitalList = await hospitalServices.getAll();
         console.log(hospitalList);
-        res.send(data);
+        const response = await Promise.all(hospitalList.map( async hospital=>{
+            const peticiones = await peticionesServices.getByMesHospital(hospital.id);
+            return{
+                id: hospital.name,
+                data:[...peticiones]
+            }
+        }));
+        res.send(response);
     } catch (error) {
         next(error)
     }

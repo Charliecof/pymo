@@ -27,6 +27,24 @@ exports.getByHospital = async (idHospital) => {
 	return peticiones;
 };
 
+exports.getByMesHospital = async (idHospital) =>{
+	const peticiones = await model.peticiones.findMany({
+		where: {
+			AND:[
+				{id_hospital: idHospital},
+				{date:{
+					gte: new Date('2020-01-01'),
+					lt: new Date('2022-01-01')
+				}}
+			]
+		},
+		include:{ 
+			insumos: true
+		}
+	})
+	return peticiones;
+}
+
 exports.getById = async (idPeticion) => {
 	const peticion = await model.peticiones.findUnique({
 		where: { id: idPeticion },
@@ -59,12 +77,10 @@ exports.aproveById = async (id)=>{
 	return peticion;
 }
 
-exports.getByMonth = async (anio)=>{
+/* exports.getBy = async (anio)=>{
 	const peticiones = await model.peticiones.groupBy({
 		by:['id_hospital','active','date'],
-		/* having:{
-			active: true
-		} */
 	});
 	return peticiones;
 }
+ */
