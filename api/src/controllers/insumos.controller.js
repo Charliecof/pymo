@@ -10,6 +10,15 @@ exports.addInsumo = async (req,res,next)=>{
     }
 }
 
+exports.getInsumos = async (req,res,next) =>{
+    try {
+        const insumos = await insumosServices.getAll();
+        res.send(insumos);
+    } catch (error) {
+        next(error)
+    }
+}
+
 exports.findInsumoById = async (req,res,next) =>{
     const id = parseInt(req.params.id);
     try {     

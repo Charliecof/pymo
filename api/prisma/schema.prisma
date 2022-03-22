@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -31,22 +31,50 @@ model Peticiones{
   id Int @id @default(autoincrement())
   hospital Hospital @relation(fields: [id_hospital],references: [id])
   id_hospital Int
-  insumos Insumos[]
+  active Boolean @default(true)
+  date DateTime?
+  insumos InsumosPeticiones[]
 }
 
 model Insumos{
   id Int @id @default(autoincrement())
   nombre String
-  descripcion String
-  peticiones Peticiones[]
-  paquetes Paquetes[]
+  nombre_clave String @default("")
+  descripcion String 
+  peticiones InsumosPeticiones[]
+  paquetes InsumosPaquete[]
+  bodega InsumosBodega?
 }
 
+model InsumosPeticiones{
+  id Int @id @default(autoincrement())
+  insumos Insumos @relation(fields: [id_insumo],references: [id])
+  id_insumo Int
+  peticion Peticiones @relation(fields: [id_peticion],references: [id])
+  id_peticion Int
+  cantidad Int
+}
 
 model Paquetes{
   id Int @id @default(autoincrement())
-  hospital Hospital @relation(fields: [id_hospital],references: [id])
+  hospital Hospital? @relation(fields: [id_hospital],references: [id])
   id_hospital Int
   delivery_date DateTime
-  insumos Insumos[]  
+  insumos InsumosPaquete[]  
+}
+
+model InsumosPaquete{
+  id Int @id @default(autoincrement())
+  insumo Insumos @relation(fields:[id_insumo],references: [id])
+  id_insumo Int
+  paquete Paquetes @relation(fields: [id_paquete],references: [id])
+  id_paquete Int
+  cantidad Int
+}
+
+model InsumosBodega{
+  id Int @id @default(autoincrement())
+  insumo Insumos @relation(fields: [id_insumo],references: [id])
+  id_insumo Int
+  cantidad Int
 }

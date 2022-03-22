@@ -2,7 +2,8 @@ const PrismaClient = require("@prisma/client").PrismaClient;
 const model = new PrismaClient();
 
 exports.addOne = async (payload) =>{
-    const newCaso = await model.casos.create({data:{payload}});
+    payload.mes = new Date(payload.mes)
+    const newCaso = await model.casos.create({data:payload});
     return newCaso;
 }
 

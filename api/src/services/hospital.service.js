@@ -15,5 +15,3 @@ exports.getById = async (id) => {
 	const hospital = await model.hospital.findUnique({ where: { id: id } });
     return hospital;
 };
-
-exports.add

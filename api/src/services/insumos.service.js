@@ -10,3 +10,8 @@ exports.findById = async (id) =>{
     const insumo = await model.insumos.findUnique({where:{id:id}});
     return insumo;
 }
+
+exports.getAll = async ()=>{
+    const insumos = await model.insumos.findMany();
+    return insumos;
+}
