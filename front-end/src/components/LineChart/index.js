@@ -1,8 +1,8 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
 
-export default function LineChart() {
-	const data = [
+export default function LineChart({data}) {
+	/* const data = [
         {
             "id": "Cubrebocas",
             "data": [
@@ -162,7 +162,7 @@ export default function LineChart() {
                 }
             ]
         }
-    ];
+    ]; */
 	return (
 		<div style={{height:'100%',color:'black'}}>
 			<ResponsiveLine
@@ -180,13 +180,13 @@ export default function LineChart() {
 				axisTop={null}
 				axisRight={null}
 				axisBottom={{
-					orient: 'bottom',
-					tickSize: 5,
+					orient: 'top',
+					tickSize: 1,
 					tickPadding: 5,
 					tickRotation: 0,
 					legend: 'Meses',
 					legendOffset: 40,
-					legendPosition: 'middle',
+					legendPosition: '',
 				}}
 				axisLeft={{
 					orient: 'left',

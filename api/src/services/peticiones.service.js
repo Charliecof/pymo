@@ -59,7 +59,12 @@ exports.getActive = async () => {
 	const peticiones = await model.peticiones.findMany({
 		where: { active: true },
 		include: {
-			insumos: true,
+			insumos: {
+				include:{
+					insumos: true
+				}
+			},
+			hospital:true
 		},
 	});
 	return peticiones;
@@ -76,11 +81,3 @@ exports.aproveById = async (id)=>{
 	});
 	return peticion;
 }
-
-/* exports.getBy = async (anio)=>{
-	const peticiones = await model.peticiones.groupBy({
-		by:['id_hospital','active','date'],
-	});
-	return peticiones;
-}
- */

@@ -31,7 +31,7 @@ app.use(morgan('combined'));
 app.use("/hospitales", hospitalRoutes);
 app.use("/insumos", insumosRoutes);
 app.use('/bodega',bodegaRoutes);
-app.use("/paquete", paqueteRoutes);
+app.use("/paquetes", paqueteRoutes);
 app.use("/peticiones", peticionesRoutes);
 app.use("/casosRoutes", casosRoutes);
 app.use("*", errorNotFoud);

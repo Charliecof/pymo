@@ -1,5 +1,6 @@
 const peticionesServices = require('../services/peticiones.service');
 const hospitalServices = require('../services/hospital.service');
+const bodegaServices = require('../services/bodega.service');
 const casosServices = require('../services/casos.service');
 const paquetesServices = require('../services/paquetes.service');
 exports.createPeticion = async (req,res,next) =>{
@@ -9,7 +10,6 @@ exports.createPeticion = async (req,res,next) =>{
         const casos = await casosServices.addOne(payload.casos);
         res.send(peticion);
     } catch (error) {
-        console.log(error);
         next(error)
     }
 }
@@ -48,39 +48,40 @@ exports.acceptPeticion = async (req,res,next) =>{
     try {
         await peticionesServices.aproveById(id);
         const peticiones = await peticionesServices.getById(id);
+        peticiones.insumos.forEach(async element => {
+            const res =  await bodegaServices.updateCantidad(element.id_insumo,element.cantidad);
+        });
         peticiones.insumos.forEach(element => {
             delete element.id
             delete element.id_peticion
         });
         const paquetes = await paquetesServices.addPaquete(peticiones);
-        console.log(paquetes);
+        
+
+
         res.send(paquetes)
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 
 exports.peticionesGraph = async (req,res,next) =>{
     const id = parseInt(req.params.id);
-    console.log(id);
     try {
         const peticiones = await peticionesServices.getByHospital(id);
         const cubrebocas = peticiones.map(pet =>{
-            console.log(pet.date.toISOString().split('T')[0]);
             return{
                 x: pet.date.toISOString().split('T')[0],
                 y: pet.insumos[0].cantidad
             }
         });
         const caretas = peticiones.map(pet =>{
-            console.log(pet.date.toISOString().split('T')[0]);
             return{
                 x: pet.date.toISOString().split('T')[0],
                 y: pet.insumos[1].cantidad
             }
         });
         const lentes = peticiones.map(pet =>{
-            console.log(pet.date.toISOString().split('T')[0]);
             return{
                 x: pet.date.toISOString().split('T')[0],
                 y: pet.insumos[2].cantidad
@@ -97,7 +98,7 @@ exports.peticionesGraph = async (req,res,next) =>{
             },
             {
                 id: 'Lentes',
-                data: caretas
+                data: lentes
             }
         ]
         res.send(data);
