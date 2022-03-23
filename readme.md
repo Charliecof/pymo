@@ -5,6 +5,10 @@
 
 ![AssesmentPymoER](https://user-images.githubusercontent.com/39030799/159767186-152bf644-a9c6-40ae-ad3c-40fb52568aa1.png)
 
+## Tablas en Excel
+
+https://docs.google.com/spreadsheets/d/14kwEseci9ej__KyW26JUo5ofvD7ihotFfXznZsqu3-g/edit?usp=sharing
+
 ## Dev instrucciones
 
 El admin esta dividido en la API y el front-end con sus respectivas carpetas
