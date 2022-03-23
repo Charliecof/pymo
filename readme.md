@@ -23,6 +23,10 @@ El admin esta dividido en la API y el front-end con sus respectivas carpetas
 7. `npm install`
 8. `npm run dev`
 
+###### Nota: para acceder al admin de base de datos
+
+Para correr el admin para la base de datos es necesario correr `npx prisma studio`, esto te dará acceso a un cliente para la base de datos con datos ya cargados. Es necesario tener el .env correcto (proporcionado por correo)
+
 
 ### Home
 
