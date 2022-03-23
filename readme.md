@@ -1,5 +1,10 @@
 # Pymo admin
 
+
+## Diagrama Entidad Relacion
+
+![AssesmentPymoER](https://user-images.githubusercontent.com/39030799/159767186-152bf644-a9c6-40ae-ad3c-40fb52568aa1.png)
+
 ## Dev instrucciones
 
 El admin esta dividido en la API y el front-end con sus respectivas carpetas
