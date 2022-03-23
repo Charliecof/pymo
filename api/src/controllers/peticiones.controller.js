@@ -61,17 +61,46 @@ exports.acceptPeticion = async (req,res,next) =>{
 }
 
 exports.peticionesGraph = async (req,res,next) =>{
+    const id = parseInt(req.params.id);
+    console.log(id);
     try {
-        const hospitalList = await hospitalServices.getAll();
-        console.log(hospitalList);
-        const response = await Promise.all(hospitalList.map( async hospital=>{
-            const peticiones = await peticionesServices.getByMesHospital(hospital.id);
+        const peticiones = await peticionesServices.getByHospital(id);
+        const cubrebocas = peticiones.map(pet =>{
+            console.log(pet.date.toISOString().split('T')[0]);
             return{
-                id: hospital.name,
-                data:[...peticiones]
+                x: pet.date.toISOString().split('T')[0],
+                y: pet.insumos[0].cantidad
             }
-        }));
-        res.send(response);
+        });
+        const caretas = peticiones.map(pet =>{
+            console.log(pet.date.toISOString().split('T')[0]);
+            return{
+                x: pet.date.toISOString().split('T')[0],
+                y: pet.insumos[1].cantidad
+            }
+        });
+        const lentes = peticiones.map(pet =>{
+            console.log(pet.date.toISOString().split('T')[0]);
+            return{
+                x: pet.date.toISOString().split('T')[0],
+                y: pet.insumos[2].cantidad
+            }
+        });
+        const data =[
+            {
+                id: 'Cubrebocas',
+                data: cubrebocas
+            },
+            {
+                id:'Caretas',
+                data: caretas
+            },
+            {
+                id: 'Lentes',
+                data: caretas
+            }
+        ]
+        res.send(data);
     } catch (error) {
         next(error)
     }

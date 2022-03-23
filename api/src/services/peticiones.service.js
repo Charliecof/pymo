@@ -22,7 +22,7 @@ exports.addPeticionInsumos = async (payload) => {
 exports.getByHospital = async (idHospital) => {
 	const peticiones = await model.peticiones.findMany({
 		where: { id_hospital: idHospital },
-		include: { insumos },
+		include: { insumos:true },
 	});
 	return peticiones;
 };

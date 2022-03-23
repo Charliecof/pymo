@@ -41,7 +41,32 @@ export default function Admin() {
 								</div>
 							</div>
 						</div>
-						<div className="col-6"></div>
+						<div className="col-6">
+						<div
+								className="card  mb-3"
+								style={{
+									backgroundColor: 'rgba(255, 255, 255, 0.85)',
+								}}
+							>
+								<div className="card-header text-center m-0">
+									<p
+										style={{
+											color: 'rgba(58, 58, 58, 1)',
+											fontSize: '20px',
+											margin: '0',
+										}}
+									>
+										Insumos en Bodega
+									</p>
+								</div>
+								<div
+									style={{ height: '300px' }}
+									className="card-body"
+								>
+									<LineChart />
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</RightColumn>
