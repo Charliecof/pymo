@@ -25,7 +25,7 @@ El admin esta dividido en la API y el front-end con sus respectivas carpetas
 
 ###### Nota: para acceder al admin de base de datos
 
-Para correr el admin para la base de datos es necesario correr `npx prisma studio`, esto te dará acceso a un cliente para la base de datos con datos ya cargados. Es necesario tener el .env correcto (proporcionado por correo)
+Para correr el admin para la base de datos es necesario correr `npx prisma studio`, esto te dará acceso a un cliente para la base de datos con datos ya cargados. Es necesario tener el .env correcto (proporcionado por correo). De igual manera con el archivo pymoDump.sql es un set de datos para la base de datos
 
 
 ### Home
