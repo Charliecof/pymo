@@ -2,3 +2,17 @@
     border: 1px solid #636363;
     color: #636363;
 }
+
+.btn-siguiente{
+    background-color: rgb(184, 184, 184);
+    border: solid 2px rgba(209, 209, 209, 0.26);
+    color: rgb(241, 241, 241);
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.btn-siguiente:hover{
+    background-color: rgb(24, 214, 50);
+}

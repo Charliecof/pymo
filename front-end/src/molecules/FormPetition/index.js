@@ -7,6 +7,7 @@ import {
 	postPeticion,
 } from '../../utils/apiRequests.js';
 import swal from 'sweetalert';
+import './styles.css';
 export default function FormPetition() {
 	const [hospitales, setHospitals] = useState([]);
 	const [insumos, setInsumos] = useState([]);
@@ -53,6 +54,8 @@ export default function FormPetition() {
 			await postPeticion(postData);
 			swal({
 				title: 'Solicitud enviada',
+			}).then((res) => {
+				window.location.replace('/newPeticion');
 			});
 		} catch (error) {
 			console.error(error);
@@ -101,7 +104,9 @@ export default function FormPetition() {
 						)}
 					</ErrorMessage>
 					<div className="text-end">
-						<a style={{color:"blue"}} href="/hospitalForm">Agregar Hospital</a>
+						<a style={{ color: 'blue' }} href="/hospitalForm">
+							Agregar Hospital
+						</a>
 					</div>
 				</div>
 				<div className="row">
@@ -172,7 +177,7 @@ export default function FormPetition() {
 				})}
 
 				<div className="mt-2 text-end">
-					<button className="btn" type="submit">
+					<button className="btn-siguiente " type="submit">
 						Siguiente
 					</button>
 				</div>

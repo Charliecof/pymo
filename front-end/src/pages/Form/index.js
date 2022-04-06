@@ -8,9 +8,11 @@ export default function Form() {
 			<div className="row">
 				<div className="col"></div>
 				<div className="col">
-					<Card title="Peticion de Insumos">
-						<FormPetition />
-					</Card>
+					<div className="pt-5">
+						<Card title="Peticion de Insumos">
+							<FormPetition />
+						</Card>
+					</div>
 				</div>
 				<div className="col"></div>
 			</div>

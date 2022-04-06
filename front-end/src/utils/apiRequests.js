@@ -38,7 +38,7 @@ const getActivePeticiones = async () => {
 };
 
 const getPaquetesGraph = async (id) =>{
-    const data = await instance.get(`/peticiones/graph/${id}`);
+    const data = await instance.get(`/paquetes/graph/${id}`);
     return data.data;
 }
 
