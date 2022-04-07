@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgres"
+  url      = "postgresql://postgres:Rancio7$@localhost:5432/pymo"
 }
 
 
@@ -77,4 +77,11 @@ model InsumosBodega{
   insumo Insumos @relation(fields: [id_insumo],references: [id])
   id_insumo Int
   cantidad Int
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  mail String
+  password String
+  name String
 }

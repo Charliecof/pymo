@@ -7,10 +7,11 @@ exports.addOne = async (payload) => {
 };
 
 exports.addPeticionInsumos = async (payload) => {
+	const dateValues = payload.casos.mes.split('-', 2);
 	const newPeticion = await model.peticiones.create({
 		data: {
 			id_hospital: payload.hospital,
-			date: new Date(),
+			date: new Date(dateValues[0], parseInt(dateValues[1]) - 1),
 			insumos: {
 				create: [...payload.insumos],
 			},
@@ -19,38 +20,47 @@ exports.addPeticionInsumos = async (payload) => {
 	return newPeticion;
 };
 
-exports.getByHospital = async (idHospital) => {
+exports.getByHospital = async (idHospital, year) => {
 	const peticiones = await model.peticiones.findMany({
-		where: { id_hospital: idHospital },
-		include: { insumos:true },
+		where: {
+			id_hospital: idHospital,
+			date: {
+				gte: new Date(`${year}-01-01`),
+				lt: new Date(`${year + 1}-01-01`),
+			},
+		},
+		include: { insumos: true },
+		orderBy: { date: 'asc' },
 	});
 	return peticiones;
 };
 
-exports.getByMesHospital = async (idHospital) =>{
+exports.getByMesHospital = async (idHospital, year) => {
 	const peticiones = await model.peticiones.findMany({
 		where: {
-			AND:[
-				{id_hospital: idHospital},
-				{date:{
-					gte: new Date('2020-01-01'),
-					lt: new Date('2022-01-01')
-				}}
-			]
+			AND: [
+				{ id_hospital: idHospital },
+				{
+					date: {
+						gte: new Date(`${year}-01-01`),
+						lt: new Date(`${year + 1}-01-01`),
+					},
+				},
+			],
 		},
-		include:{ 
-			insumos: true
-		}
-	})
+		include: {
+			insumos: true,
+		},
+	});
 	return peticiones;
-}
+};
 
 exports.getById = async (idPeticion) => {
 	const peticion = await model.peticiones.findUnique({
 		where: { id: idPeticion },
-		include:{
-			insumos: true
-		}
+		include: {
+			insumos: true,
+		},
 	});
 	return peticion;
 };
@@ -60,24 +70,24 @@ exports.getActive = async () => {
 		where: { active: true },
 		include: {
 			insumos: {
-				include:{
-					insumos: true
-				}
+				include: {
+					insumos: true,
+				},
 			},
-			hospital:true
+			hospital: true,
 		},
 	});
 	return peticiones;
 };
 
-exports.aproveById = async (id)=>{
-	const peticion =  await model.peticiones.update({
-		where:{
-			id: id
+exports.aproveById = async (id) => {
+	const peticion = await model.peticiones.update({
+		where: {
+			id: id,
 		},
-		data:{
-			active: false
-		}
+		data: {
+			active: false,
+		},
 	});
 	return peticion;
-}
+};

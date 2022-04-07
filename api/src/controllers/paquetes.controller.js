@@ -1,5 +1,5 @@
 const paquetesServices = require('../services/paquetes.service');
-
+const dateUtils = require('../utils/DateUtils');
 exports.addPaquete = async (req,res,next) => {
     const payload = req.body;
     try{
@@ -22,24 +22,26 @@ exports.getPaquetesHospital = async (req,res,next) =>{
 }
 
 exports.paquetesGraph = async (req,res,next) =>{
+    const year = parseInt(req.query.year);
     const id = parseInt(req.params.id);
     try {
-        const paquetes = await paquetesServices.getByHospital(id);
+        const paquetes = await paquetesServices.getByHospital(id,year);
+        if(paquetes.length===0) return res.send([]);
         const cubrebocas = paquetes.map(paq=>{
             return{
-                x: paq.delivery_date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(paq.delivery_date),
                 y: paq.insumos[0].cantidad
             }
         });
         const caretas = paquetes.map(paq =>{
             return{
-                x: paq.delivery_date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(paq.delivery_date),
                 y: paq.insumos[1].cantidad
             }
         });
         const lentes = paquetes.map(paq =>{
             return{
-                x: paq.delivery_date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(paq.delivery_date),
                 y: paq.insumos[2].cantidad
             }
         });

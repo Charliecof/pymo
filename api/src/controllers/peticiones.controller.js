@@ -3,6 +3,7 @@ const hospitalServices = require('../services/hospital.service');
 const bodegaServices = require('../services/bodega.service');
 const casosServices = require('../services/casos.service');
 const paquetesServices = require('../services/paquetes.service');
+const dateUtils = require('../utils/DateUtils');
 exports.createPeticion = async (req,res,next) =>{
     const payload = req.body;
     try {
@@ -67,23 +68,24 @@ exports.acceptPeticion = async (req,res,next) =>{
 
 exports.peticionesGraph = async (req,res,next) =>{
     const id = parseInt(req.params.id);
+    const year = parseInt(req.query.year);
     try {
-        const peticiones = await peticionesServices.getByHospital(id);
+        const peticiones = await peticionesServices.getByHospital(id,year);
         const cubrebocas = peticiones.map(pet =>{
             return{
-                x: pet.date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(pet.date),
                 y: pet.insumos[0].cantidad
             }
         });
         const caretas = peticiones.map(pet =>{
             return{
-                x: pet.date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(pet.date),
                 y: pet.insumos[1].cantidad
             }
         });
         const lentes = peticiones.map(pet =>{
             return{
-                x: pet.date.toISOString().split('T')[0],
+                x: dateUtils.dateToMonthString(pet.date),
                 y: pet.insumos[2].cantidad
             }
         });
