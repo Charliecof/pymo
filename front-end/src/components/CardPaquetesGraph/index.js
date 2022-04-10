@@ -3,7 +3,7 @@ import { getPaquetesGraph, getHospitals } from '../../utils/apiRequests';
 import LineChart from '../LineChart';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-export default function CardPaquetesGraph() {
+export default function CardPaquetesGraph({year}) {
 	const [position, setPosition] = useState(0);
 	const [data, setData] = useState([]);
 	const [hospitals, setHospitlas] = useState([]);
@@ -11,19 +11,20 @@ export default function CardPaquetesGraph() {
 		try {
 			const hospitalList = await getHospitals();
 			setHospitlas([...hospitalList]);
-			const aux = await getPaquetesGraph(hospitalList[0].id);
+			const aux = await getPaquetesGraph(hospitalList[position].id,`20${year}`);
+			console.log(aux,'aux');
 			setData([...aux]);
 		} catch (error) {
 			console.error(error);
 		}
-	}, []);
+	}, [year]);
 
 	const handleNext = async () => {
 		if (position < hospitals.length - 1) {
 			try {
 				const acum = position + 1;
 				setPosition(acum);
-				const aux = await getPaquetesGraph(hospitals[acum].id);
+				const aux = await getPaquetesGraph(hospitals[acum].id,`20${year}`);
 				setData([...aux]);
 			} catch (error) {
 				console.error(error);
@@ -36,7 +37,7 @@ export default function CardPaquetesGraph() {
 			try {
 				const acum = position - 1;
 				setPosition(acum);
-				const aux = await getPaquetesGraph(hospitals[acum].id);
+				const aux = await getPaquetesGraph(hospitals[acum].id,`20${year}`);
 				setData([...aux]);
 			} catch (error) {
 				console.error(error);

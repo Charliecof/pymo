@@ -27,8 +27,9 @@ const addHospital = async (postData) => {
 	return hospital;
 };
 
-const getPeticionesGraph = async (id) => {
-	const data = await instance.get(`/peticiones/graph/${id}`);
+const getPeticionesGraph = async (id,year) => {
+	const data = await instance.get(`/peticiones/graph/${id}?year=${year}`);
+	console.log(`/peticiones/graph/${id}?year=${year}`,'peticiones');
 	return data.data;
 };
 
@@ -37,8 +38,9 @@ const getActivePeticiones = async () => {
 	return peticiones.data;
 };
 
-const getPaquetesGraph = async (id) =>{
-    const data = await instance.get(`/paquetes/graph/${id}`);
+const getPaquetesGraph = async (id,year) =>{
+    const data = await instance.get(`/paquetes/graph/${id}?year=${year}`);
+	console.log(`/paquetes/graph/${id}?year=${year}`);
     return data.data;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Menu from '../../components/Menu';
 import RightColumn from '../../layout/RightColum';
 import TabNavigation from '../../components/TabNavigation';
@@ -8,6 +8,10 @@ import TablePeticiones from '../../components/TablePeticiones';
 import CardPaquetesGraph from '../../components/CardPaquetesGraph';
 
 export default function Admin() {
+	const [nav,setNav] = useState('20');
+	const handleChange = (value) =>{
+		setNav(value);
+	}
 	return (
 		<div style={{ display: 'flex', position: 'relative', height: '100%' }}>
 			<Menu />
@@ -22,7 +26,7 @@ export default function Admin() {
 				>
 					<div className="p-3" style={{ widht: '100%' }}>
 						<h2>Inicio</h2>
-						<TabNavigation />
+						<TabNavigation year={nav} handleChange={handleChange}  />
 					</div>
 					<div className="row m-2">
 						<div className="col-6">
@@ -53,12 +57,12 @@ export default function Admin() {
 							</div>
 						</div>
 						<div className="col-6">
-							<CardGraph />
+							<CardGraph year={nav} />
 						</div>
 					</div>
 					<div className="row">
 						<div className="col">
-							<CardPaquetesGraph />
+							<CardPaquetesGraph year={nav} />
 						</div>
 					</div>
 					<div className="row">

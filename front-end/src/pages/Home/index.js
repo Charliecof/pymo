@@ -6,12 +6,12 @@ export default function Home() {
 			<div className="row">
 				<div className="col">
 					<div className="d-flex justify-content-center" style={{ width: '100%' }}>
-						<a className="p-3" href="/admin">
+						<button className="btn btn-secondary m-5" onClick={()=>{window.location.replace('/admin')}} >
 							<h2>Admin</h2>
-						</a>
-						<a className="p-3" href="/newPeticion">
+						</button>
+						<button className="btn btn-secondary m-5" onClick={()=>{window.location.replace('/newPeticion')}} >
 							<h2>Formulario</h2>
-						</a>
+						</button>
 					</div>
 				</div>
 			</div>

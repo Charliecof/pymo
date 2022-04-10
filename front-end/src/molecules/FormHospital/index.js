@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { hospitalSchema } from '../../utils/hospitalSchema';
 import { addHospital } from '../../utils/apiRequests';
 import swal from 'sweetalert';
+import './styles.css'
 
 export default function FormHospital() {
 	const initialValues = {
@@ -44,7 +45,7 @@ export default function FormHospital() {
 				</div>
 
 				<div className="text-end">
-					<button className="btn mt-2" type="submit">
+					<button className="btn-siguiente mt-2 " type="submit">
 						Agregar
 					</button>
 				</div>

@@ -16,7 +16,7 @@ exports.createPeticion = async (req,res,next) =>{
 }
 
 exports.getPeticionesHostpital = async (req,res,next) =>{
-    const id = req.params.id
+    const id = parseInt(req.params.id);
     try {
         const peticiones = peticionesServices.getByHospital(id);
         res.send(peticiones);

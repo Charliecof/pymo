@@ -8,9 +8,11 @@ export default function NewHospital() {
 			<div className="row">
 				<div className="col"></div>
 				<div className="col">
+					<div className="mt-4" >
 					<Card title="Peticion de Insumos">
 						<FormHospital />
 					</Card>
+					</div>
 				</div>
 				<div className="col"></div>
 			</div>

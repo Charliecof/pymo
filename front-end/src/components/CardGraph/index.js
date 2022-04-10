@@ -3,7 +3,7 @@ import { getPeticionesGraph, getHospitals } from '../../utils/apiRequests';
 import LineChart from '../LineChart';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-export default function CardGraph() {
+export default function CardGraph({year}) {
 	const [position, setPosition] = useState(0);
 	const [data, setData] = useState([]);
 	const [hospitals, setHospitlas] = useState([]);
@@ -11,19 +11,19 @@ export default function CardGraph() {
 		try {
 			const hospitalList = await getHospitals();
 			setHospitlas([...hospitalList]);
-			const aux = await getPeticionesGraph(hospitalList[0].id);
+			const aux = await getPeticionesGraph(hospitalList[position].id,`20${year}`);
 			setData([...aux]);
 		} catch (error) {
 			console.error(error);
 		}
-	}, []);
+	}, [year]);
 
 	const handleNext = async () => {
 		if (position < hospitals.length - 1) {
 			try {
 				const acum = position + 1;
 				setPosition(acum);
-				const aux = await getPeticionesGraph(hospitals[acum].id);
+				const aux = await getPeticionesGraph(hospitals[acum].id,`20${year}`);
 				setData([...aux]);
 			} catch (error) {
 				console.error(error);
@@ -36,7 +36,7 @@ export default function CardGraph() {
 			try {
 				const acum = position - 1;
 				setPosition(acum);
-				const aux = await getPeticionesGraph(hospitals[acum].id);
+				const aux = await getPeticionesGraph(hospitals[acum].id,`20${year}`);
 				setData([...aux]);
 			} catch (error) {
 				console.error(error);

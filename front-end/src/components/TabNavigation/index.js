@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
 
-export default function TabNavigation() {
-	const [nav, setNav] = useState('anio');
+export default function TabNavigation({year,handleChange}) {
+	
 	return (
 		<ul className="nav nav-tabs">
 			<li className="nav-item">
 				<a
-                    onClick={()=>setNav('hoy')}
-					className={nav === 'hoy' ? 'nav-link active' : 'nav-link disabled'}
+                    onClick={()=>handleChange('20')}
+					className={year === '20' ? 'nav-link active' : 'nav-link'}
 					href="#"
 				>
-					Hoy
+					2020
 				</a>
 			</li>
 			<li className="nav-item">
 				<a
-                    onClick={()=>setNav('mes')}
-					className={nav === 'mes' ? 'nav-link active' : 'nav-link disabled'}
+                    onClick={()=>handleChange('21')}
+					className={year === '21' ? 'nav-link active' : 'nav-link'}
 					href="#"
 				>
-					Mes
+					2021
 				</a>
 			</li>
 			<li className="nav-item">
 				<a
-                    onClick={()=>setNav('anio')}
-					className={nav === 'anio' ? 'nav-link active' : 'nav-link '}
+                    onClick={()=>handleChange('22')}
+					className={year === '22' ? 'nav-link active' : 'nav-link '}
 					href="#"
 				>
-					Año
+					2022
 				</a>
 			</li>
 		</ul>
