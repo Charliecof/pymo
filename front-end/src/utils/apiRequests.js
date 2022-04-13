@@ -27,9 +27,9 @@ const addHospital = async (postData) => {
 	return hospital;
 };
 
-const getPeticionesGraph = async (id,year) => {
+const getPeticionesGraph = async (id, year) => {
 	const data = await instance.get(`/peticiones/graph/${id}?year=${year}`);
-	console.log(`/peticiones/graph/${id}?year=${year}`,'peticiones');
+	console.log(`/peticiones/graph/${id}?year=${year}`, 'peticiones');
 	return data.data;
 };
 
@@ -38,16 +38,20 @@ const getActivePeticiones = async () => {
 	return peticiones.data;
 };
 
-const getPaquetesGraph = async (id,year) =>{
-    const data = await instance.get(`/paquetes/graph/${id}?year=${year}`);
-	console.log(`/paquetes/graph/${id}?year=${year}`);
-    return data.data;
-}
+const getPaquetesGraph = async (id, year) => {
+	const data = await instance.get(`/paquetes/graph/${id}?year=${year}`);
+	return data.data;
+};
 
-const accept = async (id)=>{
-    const peticion = await instance.get(`/peticiones/accept/${id}`);
-    return peticion;
-}
+const getCasosGraph = async (year) => {
+	const data = await instance.get(`/casos/graph/?year=${year}`);
+	return data.data;
+};
+
+const accept = async (id) => {
+	const peticion = await instance.get(`/peticiones/accept/${id}`);
+	return peticion;
+};
 
 export {
 	getHospitals,
@@ -56,7 +60,8 @@ export {
 	getDataBodega,
 	addHospital,
 	getPeticionesGraph,
-    getActivePeticiones,
-    accept,
-    getPaquetesGraph
+	getActivePeticiones,
+	accept,
+	getPaquetesGraph,
+	getCasosGraph
 };

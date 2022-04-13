@@ -7,8 +7,8 @@ export default function Form() {
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col"></div>
-				<div className="col">
-					<div className="pt-5">
+				<div className="col-lg-6 col-sm-10">
+					<div className="pt-4">
 						<Card title="Peticion de Insumos">
 							<FormPetition />
 						</Card>

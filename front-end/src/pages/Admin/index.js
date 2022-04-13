@@ -6,6 +6,7 @@ import BodegaChart from '../../components/BodegaChart';
 import CardGraph from '../../components/CardGraph';
 import TablePeticiones from '../../components/TablePeticiones';
 import CardPaquetesGraph from '../../components/CardPaquetesGraph';
+import CardCasosGraph from '../../components/CardCasosGraph';
 
 export default function Admin() {
 	const [nav,setNav] = useState('20');
@@ -63,6 +64,13 @@ export default function Admin() {
 					<div className="row">
 						<div className="col">
 							<CardPaquetesGraph year={nav} />
+						</div>
+					</div>
+					<div className="row">
+						<div className="col">
+							<div className="p-3">
+								<CardCasosGraph year={nav} />
+							</div>
 						</div>
 					</div>
 					<div className="row">

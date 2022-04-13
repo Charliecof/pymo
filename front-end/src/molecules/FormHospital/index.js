@@ -16,7 +16,7 @@ export default function FormHospital() {
 			await swal({
 				title:"Hospital enviada"
 			});
-			window.location.replace('/admin');
+			window.location.replace('/newPeticion');
 			
 		} catch (error) {
 			console.error(error);
