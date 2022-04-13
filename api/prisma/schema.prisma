@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = "postgres://postgres:Rancio7$@localhost:5432/pymo"
+  url      = env("DATABASE_URL")
 }
 
 
