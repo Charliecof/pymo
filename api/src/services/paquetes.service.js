@@ -19,14 +19,17 @@ exports.addPaquete = async (payload) => {
 	return newPaquete;
 };
 
-exports.getByHospital = async (idHospital,year) => {
+exports.getByHospital = async (idHospital, year) => {
 	const paquetes = await model.paquetes.findMany({
-		where: { id_hospital: idHospital, delivery_date:{
-			gte: new Date(`${year}-01-01`),
-			lt: new Date(`${year+1}-01-01`)
-		} },
+		where: {
+			id_hospital: idHospital,
+			delivery_date: {
+				gte: new Date(`${year}-01-01`),
+				lt: new Date(`${year + 1}-01-01`),
+			},
+		},
 		include: { insumos: true },
-		orderBy: { delivery_date: 'asc' }
+		orderBy: { delivery_date: 'asc' },
 	});
 	return paquetes;
 };

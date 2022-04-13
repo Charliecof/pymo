@@ -34,7 +34,7 @@ app.use('/insumos', insumosRoutes);
 app.use('/bodega', bodegaRoutes);
 app.use('/paquetes', paqueteRoutes);
 app.use('/peticiones', peticionesRoutes);
-app.use('/casosRoutes', casosRoutes);
+app.use('/casos', casosRoutes);
 app.use('*', errorNotFoud);
 
 // ERRRORS
